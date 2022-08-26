@@ -149,10 +149,10 @@ li {
 }
 #header {
     clear: both;
-    background: #006895 url(../images/body-bg.png) repeat-x;
+    background: #006895 url(https://m.qooh.me/images/body-bg.png) repeat-x;
 }
 .logo {
-    background: url(../images/logo.png) no-repeat;
+    background: url(https://m.qooh.me/images/logo.png) no-repeat;
     float: left;
     width: 95px;
     height: 24px;
@@ -324,7 +324,7 @@ li {
     font-size: 16px;
 }
 .block-links a {
-    background: url(../images/list-arrow.png) no-repeat 100% center;
+    background: url(https://m.qooh.me/images/list-arrow.png) no-repeat 100% center;
     border-bottom: 1px solid #d0d0d0;
     display: block;
     padding: 10px;
@@ -337,7 +337,7 @@ li {
 .back-button {
     float: right;
     margin-top: -25px;
-    background: url(../images/back-arrow.png) no-repeat 0 0;
+    background: url(https://m.qooh.me/images/back-arrow.png) no-repeat 0 0;
     font-weight: 700;
     color: #767676;
     padding: 0 0 0 17px;
@@ -645,7 +645,7 @@ li {
     opacity: 0.9;
 }
 #warning-icon {
-    background: url(/../images/warning-icon.png) no-repeat;
+    background: url(/https://m.qooh.me/images/warning-icon.png) no-repeat;
     width: 16px;
     height: 16px;
     position: absolute;
@@ -653,7 +653,7 @@ li {
     margin-left: 10px;
 }
 #info-icon {
-    background: url(../images/info-icon.png) no-repeat;
+    background: url(https://m.qooh.me/images/info-icon.png) no-repeat;
     width: 16px;
     height: 16px;
     position: absolute;
@@ -662,7 +662,7 @@ li {
     z-index: 2;
 }
 #error-icon {
-    background: url(../images/error-icon.png) no-repeat;
+    background: url(https://m.qooh.me/images/error-icon.png) no-repeat;
     width: 16px;
     height: 16px;
     position: absolute;
@@ -672,7 +672,7 @@ li {
 }
 #designed-x {
     margin-top: -35px;
-    background: url(/../images/designed-x.png);
+    background: url(/https://m.qooh.me/images/designed-x.png);
     background-size: 30px 30px;
     background-repeat: no-repeat;
     float: right;
@@ -713,20 +713,20 @@ li {
     cursor: pointer;
 }
 #documentation-container #book-icon {
-    background: url(../images/book.png) no-repeat;
+    background: url(https://m.qooh.me/images/book.png) no-repeat;
     width: 40px;
     height: 40px;
     margin-left: 50px;
     margin-top: -40px;
 }
 #user-icon {
-    background: url(../images/user-icon.png) no-repeat;
+    background: url(https://m.qooh.me/images/user-icon.png) no-repeat;
     width: 40px;
     height: 40px;
     cursor: pointer;
 }
 #user-icon:hover {
-    background: url(../images/user-icon-hover.png) no-repeat;
+    background: url(https://m.qooh.me/images/user-icon-hover.png) no-repeat;
 }
 #documentation-container #book-icon span {
     line-height: 40px;
@@ -799,7 +799,7 @@ td {
     color: graytext;
 }
 .bell {
-    background: url(../images/bell-white-1.png) no-repeat;
+    background: url(https://m.qooh.me/images/bell-white-1.png) no-repeat;
     width: 24px;
     height: 24px;
     padding-left: 13px;
@@ -809,7 +809,7 @@ td {
     color: #fff;
 }
 .bell:hover {
-    background: url(../images/bell-hover.png) no-repeat;
+    background: url(https://m.qooh.me/images/bell-hover.png) no-repeat;
 }
 #notification_count {
     background-color: #ce539e;
