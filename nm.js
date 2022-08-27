@@ -21,7 +21,7 @@ $(function() {
         }
         $.ajax({
             type: "POST",
-            url: "http://" + window.location.host + "/userprofile/designed-index/",
+            url: "https://m.qooh.me/userprofile/designed-index/",
             data: {
                 page: page++,
                 username: username,
@@ -43,7 +43,7 @@ $(function() {
             var that = this;
             $.ajax({
                 type: "POST",
-                url: "http://" + window.location.host + "/userprofile/designed-index/",
+                url: "https://m.qooh.me/userprofile/designed-index/",
                 data: {
                     question: currentID,
                     action: "remove",
@@ -105,7 +105,7 @@ $(function() {
             }
         });
     });
-    url = "http://" + window.location.host + "/userprofile/designed-index/";
+    url = "https://m.qooh.me/userprofile/designed-index/";
 });
 function followCallback(context, response) {
     if (response === "success") {
