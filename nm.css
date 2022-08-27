@@ -134,6 +134,7 @@ body {
     background: #f4f4f4;
     color: #333;
     -webkit-text-size-adjust: 100%;
+    margin-bottom:100px;
 }
 input,
 select,
