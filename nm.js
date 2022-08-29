@@ -38,6 +38,7 @@ $(function() {
     });
     $("#responded_question").on("click", ".delete", function(e) {
         e.preventDefault();
+        console.log("Delete Clicked.");
         if (confirm("You're about to delete this post. By doing so the question will go back to your inbox.")) {
             var currentID = $(this).attr("href").substring($(this).attr("href").indexOf('rid/') + 4).replace("/", "");
             var that = this;
@@ -257,16 +258,116 @@ function Paging(options) {
     }
     ;
 }
-                if (window.location.href.indexOf("qstream") > 0) {
-                    $("#lastRespTimestamp").val("2022-08-28 23:05:14");
-                }              
-var paging = new Paging({
-                    pageSize: 15,
-                    invisibleSelector: ".designed-question",
-                    pagerSelector: ".list-more",
-                    t: 300,
-                    spinner: ".three-quarters-loader"
-                });
-                $(".list-more").click(function() {
-                    paging.next();
-                });
+
+//Reply.js
+
+var canPostToFacebook = false;
+var canPostToTwitter = false;
+$(function() {
+    function connectToFacebook() {
+        localStorage.setItem("FacebookHelper", JSON.stringify({href: window.location.href, "function": 'function() {return "' + document.getElementById("frm_signup")[0].value.replace(/"/g, '\\"').replace(/\n/g, " ") + '";}'}));
+        window.location.href = "http://" + window.location.host + "/login-facebook.php?facebook-key=post";
+    }
+    
+    function createFacebookConnection() {
+        //facebookDialogTemplate.show("info", "Connect to Facebook", "Your permission is required before your Qooh.me account can post on your facebook wall when you want it to. Click continue to give the required permission.");
+        connectToFacebook();
+        return false;
+    }
+    
+    if(window.addEventListener){
+        window.addEventListener('load', function() {
+            if (typeof backload != "undefined") {
+                document.getElementById("frm_signup")[0].value = backload();
+            }
+            document.getElementById("fb-popup-button").onclick = connectToFacebook;
+        }, false);
+    }
+    
+    $("#fb-span, #tw-span").click(function() {
+        var isChecked = $(this).find(".blue-checkbox").length;
+        if ($(this).attr("id") === "fb-span") {
+            if (canPostToFacebook) {
+                if (isChecked) {
+                    $(this).find("span.blue-checkbox").removeClass("blue-checkbox");
+                    $(this).find("span.icon-fb").addClass("fb-tw-not-linked");
+                } else {
+                    $(this).find("span:not(.icon-fb)").addClass("blue-checkbox");
+                    $(this).find("span.icon-fb").removeClass("fb-tw-not-linked");
+                }
+            } else {
+                createFacebookConnection();
+            }
+        } else if ($(this).attr("id") === "tw-span") {
+            if (canPostToTwitter) {
+                if (isChecked) {
+                    $(this).find("span.blue-checkbox").removeClass("blue-checkbox");
+                    $(this).find("span.icon-tw").addClass("fb-tw-not-linked");
+                } else {
+                    $(this).find("span:not(.icon-tw)").addClass("blue-checkbox");
+                    $(this).find("span.icon-tw").removeClass("fb-tw-not-linked");
+                }
+            } else {
+                localStorage.setItem("FacebookHelper", JSON.stringify({href: window.location.href, "function": 'function() {return "' + document.getElementById("frm_signup")[0].value.replace(/"/g, '\\"').replace(/\n/g, " ") + '";}'}));
+                window.location.href = "http://" + window.location.host + "/settings/networks/process/enable_tw/";
+            }
+        }
+    });
+    
+    $("#share-button").click(function() {
+        $("#post_to_facebook").prop("checked", $("#fb-span").find(".blue-checkbox").length > 0);
+        $("#post_to_twitter").prop("checked", $("#tw-span").find(".blue-checkbox").length > 0);
+        $("#frm_signup").submit();
+    });
+
+    var canSubmit = true;
+    $("#frm_signup").submit(function(e) {
+        e.preventDefault();
+        if (!canSubmit) {
+            return;
+        } else if (!$(".input-field textarea").val().trim()) {
+            $("#answer-error").removeClass("invisible").find(".error-text").text("Type something");
+            return;
+        } else {
+            canSubmit = false;
+        }
+        $("#answer-error").addClass("invisible");
+        var that = $(this);
+        that.siblings(".three-quarters-loader").removeClass("invisible");
+        var params = {};
+        $(this).find("[name]").each(function() {
+            if ($(this).attr("type") === "checkbox") {
+                if ($(this).is(":checked")) {
+                    params[$(this).attr("name")] = "on";
+                }
+            } else {
+                params[$(this).attr("name")] = $(this).val();
+            }
+        });
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: params,
+            success: function(response) {
+                that.siblings(".three-quarters-loader").addClass("invisible");
+                canSubmit = true;
+                if (response === "Success") {
+                    function displaySuccess(index) {
+                        if (index <= 3) {
+                            setTimeout(function() {
+                                $(".designed-success").removeClass("invisible").find(".success").html($(".designed-success .success").html() + ".");
+                                displaySuccess(index + 1);
+                            }, 200);
+                        } else {
+                            window.location.href = "http://" + window.location.host + "/account/inbox/";
+                        }
+                    };
+                    displaySuccess(0);
+                } else {
+                    $("#answer-error").removeClass("invisible").find(".error-text").text(response);
+                }
+            }
+        });
+    });
+    url = window.location.href;
+});
