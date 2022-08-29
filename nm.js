@@ -1,16 +1,3 @@
-                if (window.location.href.indexOf("qstream") > 0) {
-                    $("#lastRespTimestamp").val("2022-08-28 23:05:14");
-                }              
-var paging = new Paging({
-                    pageSize: 15,
-                    invisibleSelector: ".designed-question",
-                    pagerSelector: ".list-more",
-                    t: 300,
-                    spinner: ".three-quarters-loader"
-                });
-                $(".list-more").click(function() {
-                    paging.next();
-                });
 //Profile.js
 $(function() {
     $(".fit-down").click(function() {
@@ -270,3 +257,16 @@ function Paging(options) {
     }
     ;
 }
+                if (window.location.href.indexOf("qstream") > 0) {
+                    $("#lastRespTimestamp").val("2022-08-28 23:05:14");
+                }              
+var paging = new Paging({
+                    pageSize: 15,
+                    invisibleSelector: ".designed-question",
+                    pagerSelector: ".list-more",
+                    t: 300,
+                    spinner: ".three-quarters-loader"
+                });
+                $(".list-more").click(function() {
+                    paging.next();
+                });
