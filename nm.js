@@ -106,7 +106,7 @@ $(function() {
                 }
             }
         });*/
-        Android.POST("https://m.qooh.me/userprofile/designed-index/",params);
+        Android.POST("https://m.qooh.me/userprofile/designed-index/",JSON.stringify(params));
     });
     url = "https://m.qooh.me/userprofile/designed-index/";
 });
