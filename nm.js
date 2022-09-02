@@ -72,7 +72,7 @@ $(function() {
     });
     var canSubmit = true;
     $("#designed-question_form").submit(function(e) {
-        e.preventDefault();
+        //e.preventDefault();
         if (!canSubmit) {
             return;
         } else if (!$(this).find("#question").val().trim()) {
