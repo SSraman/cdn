@@ -107,6 +107,7 @@ $(function() {
             }
         });*/
         Android.POST("https://m.qooh.me/userprofile/designed-index/",JSON.stringify(params));
+        toggleQuestionProfile();
     });
     url = "https://m.qooh.me/userprofile/designed-index/";
 });
