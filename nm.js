@@ -72,7 +72,7 @@ $(function() {
     });
     var canSubmit = true;
     $("#designed-question_form").submit(function(e) {
-        //e.preventDefault();
+        e.preventDefault();
         if (!canSubmit) {
             return;
         } else if (!$(this).find("#question").val().trim()) {
@@ -91,7 +91,7 @@ $(function() {
         $(this).find("[name]").each(function() {
             params[$(this).attr("name")] = $(this).val();
         });
-        $.ajax({
+        /*$.ajax({
             type: "POST",
             url: url,
             data: params,
@@ -105,7 +105,8 @@ $(function() {
                     $("#profile-submit-error").removeClass("invisible").find(".error-text").text(response);
                 }
             }
-        });
+        });*/
+        Android.POST("https://m.qooh.me/userprofile/designed-index/",params);
     });
     url = "https://m.qooh.me/userprofile/designed-index/";
 });
