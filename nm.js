@@ -77,6 +77,7 @@ $(function() {
             return;
         } else if (!$(this).find("#question").val().trim()) {
             $("#profile-submit-error").removeClass("invisible").find(".error-text").text("Type something");
+            Android.showToast("Type Something");
             return;
         } else {
             canSubmit = false;
