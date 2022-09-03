@@ -276,3 +276,19 @@ $(document).ready(function(){
         
   });
 });
+
+//Privacy.js
+$(document).ready(function(){
+$("#privacy_settings .submit").click(function(){
+var valuei = $("#privacy_settings > div:nth-child(1) > div > span > select").val()
+Android.PRIVACY("allow_question="+valuei+"&process=&submit=Save");
+});});
+
+$(document).ready(function(){
+$("#lock-inbox-form .submit").click(function(){
+    if($("#lock-inbox-form .submit").val() == "Lock"){
+        Android.PRIVACY("allow_question=-1&lock=Lock&process=");
+    }
+    else{
+        Android.PRIVACY("allow_question=1&unlock=Unlock&process=");
+    }});});
