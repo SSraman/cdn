@@ -291,7 +291,7 @@ $(function() {
                 params[$(this).attr("name")] = $(this).val();
             }
         });
-        $.ajax({
+        /*$.ajax({
             type: "POST",
             url: "https://m.qooh.me/inbox/?a=reply&id=133847533",
             data: params,
@@ -314,6 +314,10 @@ $(function() {
                     $("#answer-error").removeClass("invisible").find(".error-text").text("Error While Posting Your Answer :(");
                 }
             }
-        });
+        });*/
+        console.log(JSON.stringify(params));
+        var resp1 = $("textarea")[0].value;
+        var url1 = $("#url")[0].innerText;
+        Android.REPLY(url1,resp1);
     });
 });
