@@ -263,61 +263,16 @@ function Paging(options) {
 }
 
 //Reply.js
-
-var canPostToFacebook = false;
-var canPostToTwitter = false;
 $(document).ready(function(){
-    var canSubmit = true;
-    $("#frm_signup").submit(function(e) {
-        e.preventDefault();
-        if (!canSubmit) {
-            return;
-        } else if (!$(".input-field textarea").val().trim()) {
-            $("#answer-error").removeClass("invisible").find(".error-text").text("Type something");
-            return;
-        } else {
-            canSubmit = false;
-        }
-        $("#answer-error").addClass("invisible");
-        var that = $(this);
-        that.siblings(".three-quarters-loader").removeClass("invisible");
-        var params = {};
-        $(this).find("[name]").each(function() {
-            if ($(this).attr("type") === "checkbox") {
-                if ($(this).is(":checked")) {
-                    params[$(this).attr("name")] = "on";
-                }
-            } else {
-                params[$(this).attr("name")] = $(this).val();
-            }
-        });
-        /*$.ajax({
-            type: "POST",
-            url: "https://m.qooh.me/inbox/?a=reply&id=133847533",
-            data: params,
-            success: function(response) {
-                that.siblings(".three-quarters-loader").addClass("invisible");
-                canSubmit = true;
-                if (response === "Success") {
-                    function displaySuccess(index) {
-                        if (index <= 3) {
-                            setTimeout(function() {
-                                $(".designed-success").removeClass("invisible").find(".success").html($(".designed-success .success").html() + ".");
-                                displaySuccess(index + 1);
-                            }, 200);
-                        } else {
-                           //window.location.href = "http://" + window.location.host + "/account/inbox/";
-                        }
-                    };
-                    displaySuccess(0);
-                } else {
-                    $("#answer-error").removeClass("invisible").find(".error-text").text("Error While Posting Your Answer :(");
-                }
-            }
-        });*/
-        console.log(JSON.stringify(params));
+  $("#share-button").click(function(){
+        console.log("reply");
         var resp1 = $("textarea")[0].value;
         var url1 = $("#url")[0].innerText;
-        Android.REPLY(url1,resp1);
-    });
+      if(resp1.length>0){
+      Android.REPLY(url1,resp1);
+      }else{
+      Android.showToast("Type Something");
+      }
+        
+  });
 });
