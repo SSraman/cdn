@@ -174,7 +174,7 @@ $(function() {
         that.find("[name]").each(function() {
             data[$(this).attr("name")] = $(this).val();
         });
-        Android.POST("https://m.qooh.me/userprofile/designed-index/",data);
+        Android.POST("https://m.qooh.me/userprofile/designed-index/",JSON.stringify(data));
         followCallback(that, "success");
     });
     $("body").on("submit", ".like-unlike", function(e) {
