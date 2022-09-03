@@ -266,7 +266,7 @@ function Paging(options) {
 
 var canPostToFacebook = false;
 var canPostToTwitter = false;
-$(function() {
+$(document).ready(function(){
     var canSubmit = true;
     $("#frm_signup").submit(function(e) {
         e.preventDefault();
