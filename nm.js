@@ -174,14 +174,8 @@ $(function() {
         that.find("[name]").each(function() {
             data[$(this).attr("name")] = $(this).val();
         });
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: data,
-            success: function(response) {
-                followCallback(that, response);
-            }
-        });
+        Android.POST("https://m.qooh.me/userprofile/designed-index/",data);
+        followCallback(that, "success");
     });
     $("body").on("submit", ".like-unlike", function(e) {
         e.preventDefault();
@@ -292,3 +286,7 @@ $("#lock-inbox-form .submit").click(function(){
     else{
         Android.PRIVACY("allow_question=1&unlock=Unlock&process=");
     }});});
+$(document).ready(function(){
+$("#inbox-delete-all").hide();
+
+});
