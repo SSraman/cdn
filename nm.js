@@ -281,3 +281,146 @@ $("#frm_signup > div > input:nth-child(2)").click(function(){
    Android.INBOX();
 })
 });
+
+//Setting.js
+$(document).ready(function(){
+$(function() {
+    var isValid = true;
+    function handleInvalid(selector, text) {
+        isValid = false;
+        $(selector).siblings(".error").find(".error-text").text(text).siblings(".error-icon").removeClass("invisible");
+        window.scroll(0, $(selector).parent().offset().top);
+    }
+    function isValidForm() {
+        isValid = true;
+        var selector = "#username";
+        var username = $(selector).val();
+        if (!username) {
+            handleInvalid(selector, "Please enter username");
+        } else if (username.length > 15) {
+            handleInvalid(selector, "Maximum 15 characters");
+        } else if (username.length < 4) {
+            handleInvalid(selector, "Minimum 4 characters");
+        } else if (!(/^[A-Za-z0-9_.]+$/.test(username))) {
+            handleInvalid(selector, "Usernames can only contain A-Z, a-z, 0-9, _ and periods (.)");
+        } else if (!(/^[A-Za-z]+$/.test(username.substring(0, 1)))) {
+            handleInvalid(selector, "Usernames can only start with letter");
+        }
+        if (isValid) {
+            selector = "#name";
+            var name = $(selector).val();
+            if (!name) {
+                handleInvalid(selector, "Please enter name");
+            } else if (name.length > 25) {
+                handleInvalid(selector, "Maximum 25 characters");
+            }
+        }
+        if (isValid) {
+            selector = "#email";
+            var email = $(selector).val();
+            if (!email) {
+                handleInvalid(selector, "Please enter email");
+            } else if (!(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(email))) {
+                handleInvalid(selector, "Please enter valid email address");
+            }
+        }
+        if (isValid) {
+            selector = "#bio";
+            var bio = $(selector).val();
+            if (bio.length > 160) {
+                handleInvalid(selector, "Maximum 160 characters");
+            }
+        }
+        if (isValid) {
+            selector = "#question_title";
+            var headline = $(selector).val();
+            if (!headline) {
+                handleInvalid(selector, "Please enter headline");
+            }
+        }
+        return isValid;
+    }
+    var isSaving = false;
+    $("#frm_setting").submit(function(e) {
+        e.preventDefault();
+        $(".error-icon:not(.invisible)").addClass("invisible");
+        $(".error-text").text("");
+        if (isValidForm()) {
+            if (isSaving) {
+                return;
+            }
+            isSaving = true;
+            var dataToPost = {
+                tp: "ajax"
+            };
+            $("#frm_setting input[type=text], #frm_setting textarea").each(function() {
+                dataToPost[$(this).attr("name")] = $(this).val();
+            });
+            $(".three-quarters-loader-set-prof:last").removeClass("invisible");
+            $.ajax({
+                type: "POST",
+                url: "http://" + window.location.host + "/settings/designed-profile/",
+                data: dataToPost,
+                success: function(response) {
+                    $(".three-quarters-loader-set-prof:last").addClass("invisible");
+                    if (response === "success") {
+                        $(".designed-success").html("<div class=\"success\"><span class='icon-check'></span>Your Profile information is saved successfully</div>");
+                        window.scrollTo(0, 0);
+                        $("#menu-ul li:eq(3) > a").attr("href", "/" + $("#username").val());
+                    } else {
+                        var resp = $.parseJSON(response);
+                        for (var element in resp) {
+                            handleInvalid("#" + element, resp[element]);
+                        }
+                    }
+                    isSaving = false;
+                }
+            });
+        }
+    });
+    var beingUploaded = false;
+    $("#profile-form-font-size").submit(function(e) {
+        if (beingUploaded) {
+            return;
+        }
+        beingUploaded = true;
+        e.preventDefault();
+        $(".three-quarters-loader-set-prof:first").removeClass("invisible");
+        var formData = new FormData(this);
+        formData.tp = "ajax";
+        $.ajax({
+            type: "POST",
+            url: "http://m.qooh.me/settings/designed-profile/",
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                if (!!response) {
+                    $(".photo.designed-picture").attr("src", response);
+                    $(".three-quarters-loader-set-prof:first").addClass("invisible");
+                    beingUploaded = false;
+                    $("#choose-file-div").addClass("invisible");
+                } else {
+                    window.location.href = window.location.href;
+                }
+            },
+            error: function(response) {
+                console.log("failure");
+            }
+        });
+    });
+});
+});
+
+//Restore
+$(document).ready(function(){
+$("div.designed-disable-div > form > input.designed-restore-button").click(function(){
+if($("div.designed-disable-div > form > input.designed-restore-button").val() == "Disable My Account"){
+    Android.C("disable=Disable+My+Account&process=");
+}
+    else{
+        Android.C("restore=Restore+My+Account&process=");
+    }
+});
+});
