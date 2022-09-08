@@ -293,6 +293,7 @@ $("#inbox-delete-all").hide();
 });
 
 //Delete.js
+$(document).ready(function(){
 $("#frm_signup > div > input:nth-child(1)").click(function(){
    //Yes
     var url1 = $("#url")[0].innerText;
@@ -302,3 +303,4 @@ $("#frm_signup > div > input:nth-child(2)").click(function(){
    //No
    Android.DELETE("https://m.qooh.me/question/delete/rid/0");
 })
+});
