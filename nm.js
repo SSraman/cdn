@@ -36,29 +36,6 @@ $(function() {
             }
         });
     });
-    $("#responded_question").on("click", ".delete", function(e) {
-        e.preventDefault();
-        console.log("Delete Clicked.");
-        if (confirm("You're about to delete this post. By doing so the question will go back to your inbox.")) {
-            var currentID = $(this).attr("href").substring($(this).attr("href").indexOf('rid/') + 4).replace("/", "");
-            var that = this;
-            console.log(currentID);
-            $.ajax({
-                type: "POST",
-                url: "https://m.qooh.me/userprofile/designed-index/",
-                data: {
-                    question: currentID,
-                    action: "remove",
-                    tp: "ajax"
-                },
-                success: function(response) {
-                    $(that).siblings(".icon-close").click();
-                    $("#question" + currentID).remove();
-                    $("#designed-inbox-count").text(response);
-                }
-            });
-        }
-    });
     function toggleQuestionProfile() {
         $("#owner-container").hasClass("invisible") ? $("#owner-container").removeClass("invisible") : $("#owner-container").addClass("invisible");
         $(".profile, .logged-out-profile").each(function() {
