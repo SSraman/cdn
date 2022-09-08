@@ -42,6 +42,7 @@ $(function() {
         if (confirm("You're about to delete this post. By doing so the question will go back to your inbox.")) {
             var currentID = $(this).attr("href").substring($(this).attr("href").indexOf('rid/') + 4).replace("/", "");
             var that = this;
+            console.log(currentID);
             $.ajax({
                 type: "POST",
                 url: "https://m.qooh.me/userprofile/designed-index/",
@@ -290,3 +291,14 @@ $(document).ready(function(){
 $("#inbox-delete-all").hide();
 
 });
+
+//Delete.js
+$("#frm_signup > div > input:nth-child(1)").click(function(){
+   //Yes
+    var url1 = $("#url")[0].innerText;
+    Android.DELETE(url1);
+})
+$("#frm_signup > div > input:nth-child(2)").click(function(){
+   //No
+   Android.DELETE("https://m.qooh.me/question/delete/rid/0");
+})
