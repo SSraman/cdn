@@ -265,8 +265,7 @@ $("#lock-inbox-form .submit").click(function(){
         Android.PRIVACY("allow_question=1&unlock=Unlock&process=");
     }});});
 $(document).ready(function(){
-$("#inbox-delete-all").hide();
-$("#designed-change-pic-button").hide();
+$("#inbox-delete-all").hide();$("#designed-change-pic-button").hide();$("#disabled-account-logout").hide();
 });
 
 //Delete.js
