@@ -266,7 +266,7 @@ $("#lock-inbox-form .submit").click(function(){
     }});});
 $(document).ready(function(){
 $("#inbox-delete-all").hide();
-
+$("#designed-change-pic-button").hide();
 });
 
 //Delete.js
@@ -390,7 +390,7 @@ $(function() {
         formData.tp = "ajax";
         $.ajax({
             type: "POST",
-            url: "http://m.qooh.me/settings/designed-profile/",
+            url: "https://m.qooh.me/settings/designed-profile/",
             data: formData,
             cache: false,
             contentType: false,
