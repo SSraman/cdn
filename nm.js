@@ -424,3 +424,5 @@ if($("div.designed-disable-div > form > input.designed-restore-button").val() ==
     }
 });
 });
+$(document).ready(function(){
+$("#account_settings > div:nth-child(3) > input.submit.designed-submit-button").click(function(){alert("Error! Pls Try Again Later");})});
