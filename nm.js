@@ -387,7 +387,8 @@ $(function() {
         $(".three-quarters-loader-set-prof:first").removeClass("invisible");
         var formData = new FormData(this);
         formData.tp = "ajax";
-        $.ajax({
+        console.log(JSON.stringify(formData));
+       /* $.ajax({
             type: "POST",
             url: "https://m.qooh.me/settings/designed-profile/",
             data: formData,
@@ -405,9 +406,9 @@ $(function() {
                 }
             },
             error: function(response) {
-                console.log("failure");
+                console.log(formData);
             }
-        });
+        });*/
     });
 });
 });
