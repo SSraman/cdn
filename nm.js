@@ -349,14 +349,14 @@ $(function() {
                 return;
             }
             isSaving = true;
-            var dataToPost = {
-                tp: "ajax"
-            };
+          var dataToPost = "tp=ajax&";
             $("#frm_setting input[type=text], #frm_setting textarea").each(function() {
-                dataToPost[$(this).attr("name")] = $(this).val();
+                dataToPost += $(this).attr("name") + '='+ encodeURIComponent($(this).val()) +'&';
             });
+            Android.EDIT(dataToPost);
             $(".three-quarters-loader-set-prof:last").removeClass("invisible");
-            $.ajax({
+            console.log(dataToPost);
+            /*$.ajax({
                 type: "POST",
                 url: "http://" + window.location.host + "/settings/designed-profile/",
                 data: dataToPost,
@@ -374,7 +374,7 @@ $(function() {
                     }
                     isSaving = false;
                 }
-            });
+            });*/
         }
     });
     var beingUploaded = false;
