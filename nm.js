@@ -63,28 +63,11 @@ $(function() {
         $("#profile-submit-error").addClass("invisible");
         var that = $(this);
         that.siblings(".three-quarters-loader").removeClass("invisible");
-        var params = {
-            tp: "ajax"
-        };
-        $(this).find("[name]").each(function() {
-            params[$(this).attr("name")] = $(this).val();
+         var dataToPost1 = "tp=ajax&";
+                $(this).find("[name]").each(function() {
+                    dataToPost1 += $(this).attr("name") + '='+ encodeURIComponent($(this).val()) +'&';
         });
-        /*$.ajax({
-            type: "POST",
-            url: url,
-            data: params,
-            success: function(response) {
-                that.addClass("invisible");
-                canSubmit = true;
-                if (response === "Success") {
-                    toggleQuestionProfile();
-                } else {
-                    $("#designed-question_form").removeClass("invisible").siblings(".three-quarters-loader").addClass("invisible");
-                    $("#profile-submit-error").removeClass("invisible").find(".error-text").text(response);
-                }
-            }
-        });*/
-        Android.POST("https://m.qooh.me/userprofile/designed-index/",JSON.stringify(params));
+        Android.POST("https://m.qooh.me/userprofile/designed-index/",dataToPost1);
         toggleQuestionProfile();
     });
     url = "https://m.qooh.me/userprofile/designed-index/";
